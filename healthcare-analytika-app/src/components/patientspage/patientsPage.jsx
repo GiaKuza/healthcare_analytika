@@ -4,6 +4,7 @@ import axios from 'axios';
 import BootstrapTable from "react-bootstrap-table-next";
 import paginationFactory from "react-bootstrap-table2-paginator";
 import {Modal, Button} from "react-bootstrap";
+import ToolkitProvider, { Search } from 'react-bootstrap-table2-toolkit';
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "react-bootstrap-table2-paginator/dist/react-bootstrap-table2-paginator.min.css";
@@ -19,15 +20,18 @@ function PatientPage(props) {
     const [show, setShow]= useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
+
+    const {SearchBar} = Search;
    
    useEffect(() => {
     const getData = async() =>{
     const response =  await axios.get('http://localhost:5000/api/collections/patients/allRecords', { headers: {'x-auth-token': jwt} });
     setData(response.data);
+    setSearchArray(response.data);
 };
 getData()
   }, []);
-        console.log(data)
+       // console.log(data)
 
         const columnns = [
             {dataField: "firstName", text: "First Name"},
@@ -48,6 +52,8 @@ getData()
         const toggleTrueFalse = () => {
             setShowModal(handleShow);
         }
+
+
 
         const ModalContent = () => {
             return(
@@ -74,22 +80,52 @@ getData()
             )
         }
 
+            const [searchArray, setSearchArray] = useState([]);
+            /* const onChangeHandler = (e) => {
+                console.log(e.target.value)
+                let newArray = data.filter((d) => 
+                {
+                    //console.log(d);
+                    let searchValue= d.firstName.toLowerCase();
+                    return searchValue.indexOf(e.target.value) !== -1;
+                });
+                setSearchArray(newArray)
+            } */
+
+            const onChangeHandler = (e) => {
+                console.log(e.target.value)
+                let newArray = data.filter((d) => 
+                {
+                    
+                    if(d.firstName.toLowerCase().includes(e.target.value.toLowerCase()) ||
+                    (d.lastName.toLowerCase().includes(e.target.value.toLowerCase()) ||
+                    (d.ssn.toLowerCase().includes(e.target.value.toLowerCase()) )))
+                    return true;
+                    
+                });
+                setSearchArray(newArray)
+            }
 
             return (
                 <>
+              
                 {(data.length > 0) ?
-                
+                <div>
+                <input type="text"  onChange ={onChangeHandler} placeholder = "Search for..." 
+                style = {{float:'right', width:'20%', marginBottom:10, borderColo: '#000', borderWidth: 1}} />
                 <BootstrapTable 
                 keyField = "name"
-                data = {data}
+                data = {searchArray}
                 columns = {columnns}
                 pagination = {paginationFactory()}
                 rowEvents = {rowEvents}
-                />
                 
+                />
+                </div>
              :<h3>Loading Patient's Data</h3>
             }
             {show ? <ModalContent /> : null}
+            
         
 
             </>
