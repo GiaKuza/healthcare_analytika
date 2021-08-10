@@ -26,7 +26,7 @@ const App = () => {
                 {console.log(Auth)}
                     
                 <Route path = "/personal" render = {(props) => Auth ? <Personal {...props} setAuth={setAuth}/> : <Redirect to ="./not-found" />} />
-                <Route path = "/patients" render = {(props) =>  <PatientPage {...props} />} />
+                <Route path = "/patients" render = {(props) =>  Auth ? <PatientPage {...props}/> : <Redirect to ="./not-found"  />} />
                 <Route path = "/not-found" component = {NotFound} />
                 <Redirect to= "/not-found" />
 
