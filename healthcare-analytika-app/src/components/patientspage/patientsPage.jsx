@@ -5,6 +5,7 @@ import BootstrapTable from "react-bootstrap-table-next";
 import paginationFactory from "react-bootstrap-table2-paginator";
 import {Modal, Button} from "react-bootstrap";
 import ToolkitProvider, { Search } from 'react-bootstrap-table2-toolkit';
+import Twilio from "../twilio/Twilio";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "react-bootstrap-table2-paginator/dist/react-bootstrap-table2-paginator.min.css";
@@ -126,8 +127,8 @@ getData()
             }
             {show ? <ModalContent /> : null}
             
-        
-
+            <Twilio />
+            
             </>
        
         

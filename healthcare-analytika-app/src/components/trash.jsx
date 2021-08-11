@@ -90,3 +90,53 @@ const App = () => {
 }
 
 export default PatientPage;
+
+------
+import React, {useState, useEffect} from 'react';
+import axios from 'axios';
+import './Twilio.css'
+
+
+    function Twilio(props){
+        const [text, setText] = useState("");
+        const [recipient, setRecipient] = useState("");
+        const jwt = localStorage.getItem('token');
+
+        
+            const sendText = async() =>{
+            try{
+                const response =  await axios.get(`http://localhost:5000/api/twilio/send-text?recipient=${recipient}&text=${text}`, { headers: {'x-auth-token': jwt} });
+            console.log(response);
+            }catch(e){
+                console.log(e)
+            }
+        }
+        const spacer = {
+            margin: 8
+        }
+        const textArea = {
+            borderRadius: 4
+        }
+       
+        return(
+           <div style={{marginTop: 10}}>
+               <h2>Send Text Message</h2>
+               <label>Your Phone Number</label>
+               <br/>
+               <input value = {recipient}
+               onChange = { e => setRecipient(e.target.value)} />
+               <div style={spacer} />
+               <label>Message </label>
+               <br/>
+               <textarea rows={3} value = {text} style={textArea}
+               onChange = { e => setText(e.target.value)} />
+               <div style = {spacer} />
+               <button onClick={sendText} >Send Text</button>
+
+
+           </div>
+        );
+    }
+
+
+export default Twilio;
