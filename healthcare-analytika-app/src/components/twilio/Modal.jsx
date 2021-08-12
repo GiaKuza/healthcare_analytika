@@ -6,6 +6,7 @@ function Modal(props){
 
     const [modalInfo, setModalInfo] = useState([]);
     const [showModal, setShowModal] = useState(false);
+  
 
     const [show, setShow]= useState(false);
     const handleClose = () => setShow(false);
@@ -22,9 +23,20 @@ function Modal(props){
     return(
         <div className="modalBackground">
             <div className="modalContainer">
+                <button> X </button>
                 <div className ="title"></div>
-                <div className="body"></div>
-                <div className="footer"></div>
+                <h3>Compose your message</h3>
+                <label>Your Phone Number</label>
+               <br/>
+               <input value = {props.recipient}
+               onChange = { e => props.setRecipient(e.target.value)} />
+               <div style={spacer} />
+               <label>Message </label>
+               <br/>
+               <textarea rows={3} value = {props.text} style={textArea}
+               onChange = { e => props.setText(e.target.value)} />
+               <div style = {spacer} />
+               <button onClick={props.sendText} >Send Text</button>
                 
             </div>
 

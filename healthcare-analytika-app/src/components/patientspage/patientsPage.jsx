@@ -6,6 +6,7 @@ import paginationFactory from "react-bootstrap-table2-paginator";
 import {Modal, Button} from "react-bootstrap";
 import ToolkitProvider, { Search } from 'react-bootstrap-table2-toolkit';
 import Twilio from "../twilio/Twilio";
+import NavBar from '../navbar/NavBar'
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "react-bootstrap-table2-paginator/dist/react-bootstrap-table2-paginator.min.css";
@@ -111,9 +112,11 @@ getData()
                 <>
               
                 {(data.length > 0) ?
+                
                 <div>
+                     <NavBar/>
                 <input type="text"  onChange ={onChangeHandler} placeholder = "Search for..." 
-                style = {{float:'right', width:'20%', marginBottom:10, borderColo: '#000', borderWidth: 1}} />
+                style = {{float:'left', width:'20%', marginBottom:10, borderColor: '#000', borderWidth: 1}} />
                 <BootstrapTable 
                 keyField = "name"
                 data = {searchArray}
