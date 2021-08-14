@@ -61,8 +61,8 @@ h2{
 }
 
 .carousel .slide img {
-    padding-top: 100px;
-    max-height: 600px;  /* change this to whatever you want */
+    padding-top: 0px;
+    max-height: 500px;  /* change this to whatever you want */
     width: auto;
 
    
@@ -82,5 +82,18 @@ h2{
    
     color: aqua;
     background-color: rgba(0, 0, 0, 0.692);
+}
+
+
+.logo{
+    display: block;
+    max-width:330px;
+    max-height:300px;
+    width: auto;
+    height: auto;
+    
+}
+.logo-container{
+    margin-left: 0%;
 }
 

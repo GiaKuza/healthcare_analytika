@@ -1,0 +1,53 @@
+.register-label{
+    position: absolute;
+    
+    
+}
+.submit-button{
+    margin-top:10px;
+}
+.input-div{
+    position: absolute;
+    left: 20px;
+    margin-top:20px;
+    
+}
+
+.form-div{
+    position: absolute;
+    left: 50px;
+    margin-top:20px;
+
+}
+.register-form{
+    margin-top: 120px;
+    fill: white;
+    color: rgb(20, 16, 240);
+    border-style: solid;
+    position: absolute;
+    margin-left:200px;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+
+
+body {
+    background-image: url(http://kreativo.se/backlogin.jpg);
+    font-family: "Helvetica Neue", Helvetica, Arial;
+   
+}
+
+.logo{
+    display: block;
+    max-width:330px;
+    max-height:300px;
+    width: auto;
+    height: auto;
+    
+}
+.logo-container{
+    margin-left: 0%;
+}

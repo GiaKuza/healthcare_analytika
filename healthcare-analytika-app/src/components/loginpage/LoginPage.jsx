@@ -1,13 +1,17 @@
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import React, { useState,useEffect } from 'react';
 import axios from 'axios';
+import {Link} from 'react-router-dom';
+
 
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import { Carousel } from 'react-responsive-carousel';
 import charts from './assets/charts.jpg'
 import laptop from './assets/laptop.jpg'
 import messages from  './assets/messages.jpg'
+import logo from './assets/Logo.png'
 import './LoginPage.css'
+
 
 
 
@@ -21,6 +25,7 @@ function LoginPage(props) {
     
 
     const login = async() => {
+        console.log ("clicked login button")
         const credentials = { email: useremail.value,
                               password: userpassword.value };
 
@@ -55,12 +60,15 @@ function LoginPage(props) {
             }
       }, [token]);
 
-
+      const register = () => {
+          console.log("clicker register")
+      }
     return (
         <>  
-           
+           <div className="logo-container"> <img src={logo} className="logo"/> </div>
             <Form className="login-form" >
-                <h2 className="title"> Healthcare Analytika</h2>
+                
+                
                 <br/>
                 <br/>
             <h3 className="center"> Welcome </h3>
@@ -73,17 +81,15 @@ function LoginPage(props) {
                     <Label>Password: </Label>
                      <Input type="password" {...userpassword} placeholder="Password"/>
                 </FormGroup>
-                <br/>
+                
                 {error && <><small style={{ color: 'red' }}>{error}</small><br /></>}<br />
                 <Button className = "btn-lg btn-block" color="secondary" value={loading ? 'Loading...' : 'Login'} onClick={ login} disabled={loading}> Log in </Button>
-                
-                <div className="text-center pt-3"> Don't have an account? &nbsp;  
-                <Button className = "btn-sm btn-block"color="secondary"> Sign up </Button>
-                </div>
-
-
-                
-
+                <br/>
+                <br/>
+                <p style={{display:"inline-block"}}>   Dont have an account? &nbsp;</p>
+                <Link to="/register">
+                <button className = "btn-sm btn-block " color="secondary" onClick={register} > Sign up </button>
+                </Link>
             </Form>
             <div className = "carousel">
               

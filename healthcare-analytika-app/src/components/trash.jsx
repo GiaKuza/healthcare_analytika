@@ -140,3 +140,110 @@ import './Twilio.css'
 
 
 export default Twilio;
+
+----------------
+import React, {useState, useEffect} from 'react';
+import axios from 'axios';
+import Form from "react-bootstrap/Form";
+import logo from './Logo.png'
+
+import './registerPage.css'
+
+
+
+function Register(props) {
+    const username = useFormInput('');
+    const useremail = useFormInput('');
+    const userpassword = useFormInput('');
+    const [error, setError] = useState(null);
+    const [loading, setLoading] = useState(false);
+    
+
+    const [token, setToken] = useState(null);
+    
+    const register = async() => {
+        const newUser = { 
+            name: username.value,    
+            email: useremail.value,
+            password: userpassword.value };
+
+            console.log(newUser)
+
+        const response =  await axios.post("http://localhost:5000/api/auth/register/newUser", newUser);
+
+
+        localStorage.setItem('token', response.headers['x-auth-token']);
+        const tokenFromStorage = localStorage.getItem('token') ;
+
+        setToken(tokenFromStorage);
+        if(token != null ){
+            console.log("token is not nul", token)
+           props.setAuth(true);
+        }    
+  
+    }
+
+    useEffect(() => {
+     
+        console.log(" registeruseEffect")
+      
+        
+        if (token ){
+            console.log("register history push")
+            props.setAuth(true);
+            props.history.push('/personal');
+            }
+            else {
+                console.log("failed")
+               //alert("failed login! try again")
+                props.history.push('/register');
+            }
+      }, [token]);
+
+   //------
+
+  
+    
+    return (
+        <>
+            <div className="logo-container" > <img src={logo} className="logo"/> </div>
+           
+            <Form className='form-div'>
+                <div className="input-div">
+                <div className='register-div'>
+                <label for="name">Name</label>
+                <input type="text" {...username} autoComplete="new-username" />
+                </div>
+                <div >
+                    <label >Email address</label>
+                    <input type="text" {...useremail} autoComplete="new-email" />
+                </div>
+                <div>
+                    <label >Password</label>
+                    <input type="password" {...userpassword} autoComplete="new-password" />
+                </div>
+
+                {error && <><small style={{ color: 'red' }}>{error}</small><br /></>}<br />
+        
+            <input type="button" className="submit-button" value={loading ? 'Loading...' : 'Register'} onClick={ register} disabled={loading} /> 
+           
+
+               
+                </div>
+            </Form>
+        </>
+    )
+}
+const useFormInput = initialValue => {
+    const [value, setValue] = useState(initialValue);
+  
+    const handleChange = e => {
+      setValue(e.target.value);
+    }
+    return {
+      value,
+      onChange: handleChange
+    }
+  }
+
+  export default Register;
