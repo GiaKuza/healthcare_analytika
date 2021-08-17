@@ -102,9 +102,11 @@ import './Twilio.css'
             <div className="App">
                     
                     <button 
+                    
                     className="openModalBtn"
                     onClick={toggleTrueFalse}
-                    >Send a Text Message</button>
+                    >
+                        <img src="https://i.cloudup.com/gBzAn-oW_S-2000x2000.png" width="34px" height="34px" id="plane"></img>Send a Text Message</button>
                      {show ? <ModalContent /> : null}
 
             </div>

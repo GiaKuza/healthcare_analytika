@@ -1,0 +1,37 @@
+.cards-container{
+  margin: 15px 0;
+  max-height:40%;
+  width: 700px;
+  padding:0%;
+
+}
+
+.card{
+    
+
+    margin: 0 2% !important;
+  
+}
+
+.cards-infected{
+    
+    
+    margin: 0 0% !important;
+    padding-top: 0 !important;
+    
+border-bottom: 10px solid rgba(0,0,255,0.5)
+}
+
+.cards-recovered{
+    margin: 0 2% !important;
+    border-bottom: 10px solid rgba(0,255,0,0.5)
+
+}
+
+.cards-deaths{
+    margin: 0 2% !important;
+    padding-top: 0 !important;
+    
+    border-bottom: 10px solid rgba(255,0,0,0.5)
+}
+

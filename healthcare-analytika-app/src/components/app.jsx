@@ -8,6 +8,7 @@ import Personal from './personal/Personal';
 import NotFound from './notfound/NotFound';
 import PatientPage from './patientspage/patientsPage';
 import Data from './datapage/Data';
+import CovidPage from './covidPage/CovidPage';
 import jwt_decode from 'jwt-decode';
 
 const App = () => {
@@ -24,7 +25,7 @@ const App = () => {
             
             <Switch>
                 <Route exact path={"/"} component={LoginPage} />
-                <Route path = "/Login" render= {(props) => <LoginPage {...props} setAuth={setAuth} />} />
+                <Route path = "/login" render= {(props) => <LoginPage {...props} setAuth={setAuth} />} />
                 {console.log(Auth)}
                 <Route path = "/register" render= {(props) => <Register {...props} setAuth={setAuth} />} />
                
@@ -32,8 +33,9 @@ const App = () => {
                 <Route path = "/personal" render = {(props) => Auth ? <Personal {...props} setAuth={setAuth}/> : <Redirect to ="./not-found" />} />
                 <Route path = "/patients" render = {(props) =>  Auth ? <PatientPage {...props}/> : <Redirect to ="./not-found"  />} />
                 <Route path = "/data" render = {(props) =>  Auth ? <Data {...props}/> : <Redirect to ="./not-found"  />} />
+                <Route path = "/covid-tracker" render = {(props) =>  Auth ? <CovidPage {...props}/> : <Redirect to ="./not-found"  />} />
                 <Route path = "/not-found" component = {NotFound} />
-                <Redirect to= "/not-found" />
+                <Redirect to= "/login" />
 
  
             </Switch>

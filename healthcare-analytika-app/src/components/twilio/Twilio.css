@@ -9,9 +9,10 @@
 }
 
 .App .openModalBtn {
-  width: 200px;
+  width: 250px;
   height: 40px;
   border: none;
+  border-color: white;
   border-radius: 6px;
   background-color: cornflowerblue;
   color: white;

@@ -29,6 +29,9 @@ const  NavBar = (props) => {
                 <NavItem eventkey={3} href="/data">
                   <Nav.Link as={Link} to="/data" >Data</Nav.Link>
                 </NavItem>
+                <NavItem eventkey={3} href="/covid-tracker">
+                  <Nav.Link as={Link} to="/covid-tracker" >Covid19 Tracker</Nav.Link>
+                </NavItem>
               </Nav>
             </Navbar.Collapse>
           </Navbar>

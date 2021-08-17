@@ -31,7 +31,7 @@ const [chartData, setChartData] = useState({
             return (
                 <>
                     <NavBar/>
-                    <h3 >Hospital Statistics</h3>
+                    <h3 >Vaccines: Supply Availability</h3>
                     <div className='chart'>
                     <Bar 
                         data={chartData}
