@@ -35,12 +35,41 @@ const CovidChart = (props) => {
         }}
         /> : null
     );
+        console.log('props.data', props.data.confirmed)
+    const barChart = (
+        props.data.confirmed ? (
+           
+            <Bar
+            data={{
+                labels: ['Infected', 'Deaths'],
+                datasets: [{
+                    label: `Current state in ${props.selectedCountry}`,
+                    backgroundColor: [
+                        'rgba(0,0,255,0.5)',
+                        
+                        'rgba(255,0,0,0.5)',
+                    ],
+                    data: [
+                        props.data.confirmed.value, props.data.deaths.value
+                    ]
+                }]
+            }}
+            options={{
+                legend: {display: false},
+                title: {display: false, text:`Current state in ${props.selectedCountry}`},
+            }}
+            />
+        ) : null
+
+        
+    );
 
 
 
     return (
         <div className="chart-container">
-            {lineChart}
+            {props.selectedCountry ? barChart: lineChart}
+            
         </div>
     )
 }
