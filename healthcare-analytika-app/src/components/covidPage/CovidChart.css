@@ -1,6 +1,10 @@
 .chart-container{
     display: flex;
     justify-content: center;
-    width:70%
+    width:65%
 
+}
+
+.MuiGrid-spacing-xs-4{
+    margin:-6px !important
 }

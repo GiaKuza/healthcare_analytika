@@ -116,7 +116,7 @@ getData()
                 <div>
                      <NavBar/>
                 <input type="text"  onChange ={onChangeHandler} placeholder = "Search for..." 
-                style = {{float:'left', width:'20%', marginBottom:10, borderColor: '#000', borderWidth: 1}} />
+                style = {{float:'left', width:'20%', marginBottom:15, marginTop:15, marginLeft:5, borderColor: '#000', borderWidth: 1}} />
                 <BootstrapTable 
                 keyField = "name"
                 data = {searchArray}

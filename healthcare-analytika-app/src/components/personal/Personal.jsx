@@ -6,21 +6,21 @@ import jwt_decode from 'jwt-decode';
 import NavBar from '../navbar/NavBar'
 import { Switch, Route } from 'react-router-dom';
 import PatientPage from '../patientspage/patientsPage'
+import ImageUpload from './ImageUpload'
+import { Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
 
 function Personal(props) {
 
     const [user, setUser] = useState([]);
     const [userData, setUserData] = useState([]);
     const [data, setData] = useState({})
+    const [profilePhoto, setProfilePhoto] = useState("");
+    const [uploadedImage, setUploadedImage] = useState("")
+    const [ fileName, setFileName] = useState(null)
 
     const jwt = localStorage.getItem('token');
     props.setAuth(true);
-   
 
-
-    //const response = axios.get('http://localhost:5000/api/collections/user/userInfo', { headers: {'x-auth-token': jwt} })
-   // console.log(response.data)
-    
     useEffect(() => {
         const getData = async() =>{
         const response =  await axios.get('http://localhost:5000/api/collections/user/userInfo', { headers: {'x-auth-token': jwt} });
@@ -28,41 +28,96 @@ function Personal(props) {
     };
     getData()
       }, []);
-   
     
+      const fileSelectedHandler = (event) => {
+          event.preventDefault()
+          //console.log(event.target.files[0].name)
+          setProfilePhoto(event.target.files[0]);
+          setFileName(event.target.files[0].name)
+      }
+      
+      
+      const fileUploadHandler = async() => {
+          const FormData = require('form-data')
+          const fd = new FormData();
+          fd.append('file', profilePhoto)
+          //console.log(profilePhoto)
+          //console.log(fd.get('file'))
+        // await setFileName(fd.get('file').name)
+         // console.log("this file name image", fileName)
 
-      //if(isLoading) { return <div> {console.log(user)} Loading ... </div> }
+        try{
+        const response =  await axios.post('http://localhost:5000/api/collections/user/upload', fd, {  headers: {
+            'x-auth-token': jwt,
+            'Content-Type': 'multipart/form-data'} });
+            //return response;
+        
+        }catch(err){
+            if(err.response.status == 500){
+                
+                console.log('There was a problem with the server', err.response)
+            } else{
+                console.log("other error")
+            }
+        }  
+       
 
+    }
+  
 
-   
+  
+
+      
             //console.log(props.userData)
             return (
-                <>
+                <div >
+                
                 {data ?
+                    
                 
                     <div>
                     <NavBar/>
-            
-                   
+                    
                 
-                    <div className="profilePage">
-                        <h1 className="Users-Name">{data.name}</h1>
-                        <img className="profile-image"src={logo} alt="profile-pic" width="300" height="300" border-radius="50%"></img>
-                        <h2 className="bio">{data.address}</h2>
-                    <div className="form">
-                        <h5 className="name">Name</h5>
+
+                    <div className="App-profile">
+                        <h1 className="Users-Name">Welcome {data.name}!</h1>
+                        {!fileName ?
                         
-                        <h5 className="email" onSubmit="">Email</h5>
-            
-                    </div>
-                    </div>
+                        <img className="profile-image"src={require('./avatar.png').default} alt="profile-pic" width="250" height="250" border-radius="50%"></img>
+                        :  
+                        <img className="profile-image"src={ require(`./uploads/${fileName}`).default} alt="profile-pic" width="300" height="300" border-radius="50%"></img>}
+                        <div className="form-inline">
+                        <input className="form-control mr-1" type ="file" onChange ={fileSelectedHandler} id="upload"/>
+                      
+                        <button className="btn btn-primary btn-block mt-4-profile" onClick={fileUploadHandler}>Update Profile Image</button>
+                        </div>
+                        
+
+
+                            
+                        </div>
+                        <Form className="profile-form">
+                        <FormGroup>
+                            <Label for="email">Email</Label>
+                            <Input type="text" name="email" id="exampleEmail" placeholder={data.email} />
+                        </FormGroup>
+                        <FormGroup>
+                            <Label for="address">Address</Label>
+                            <Input type="text" name="password" id="examplePassword" placeholder={data.address} />
+                        </FormGroup>
+                        <FormGroup>
+                            <Label for="examplePassword">Phone</Label>
+                            <Input type="text" name="password" id="examplePassword" placeholder={data.phone} />
+                        </FormGroup>
+                       </Form> 
                     </div>
                     :<h3>No User Data</h3>
                     }
 
-                
+                    
         
-                    </>
+                    </div>
         
     )
     

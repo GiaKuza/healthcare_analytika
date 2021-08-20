@@ -1,0 +1,19 @@
+.navbar-logo{
+    height: 70px;
+   
+  width: auto;
+  margin-bottom:-5px;
+}
+
+.navbar-expand{
+    margin-top: -13px !important;
+}
+
+.color-nav{
+    background-color:rgb(25, 194, 206);
+    border-color: blue;
+}
+
+.navbar {
+    padding-bottom: 0px !important;
+}
